@@ -33,3 +33,24 @@ type AppRepository interface {
 	Update(ctx context.Context, app *models.App) error
 	Delete(ctx context.Context, id string) error
 }
+
+type ServiceRepository interface {
+	Create(ctx context.Context, service *models.Service) error
+	GetByID(ctx context.Context, id string) (*models.Service, error)
+	GetByName(ctx context.Context, name string) (*models.Service, error)
+	GetAll(ctx context.Context) ([]models.Service, error)
+	GetActive(ctx context.Context) ([]models.Service, error)
+	Update(ctx context.Context, service *models.Service) error
+	Delete(ctx context.Context, id string) error
+	Deactivate(ctx context.Context, id string) error
+}
+
+type ServiceEndpointRepository interface {
+	Create(ctx context.Context, endpoint *models.ServiceEndpoint) error
+	GetByID(ctx context.Context, id string) (*models.ServiceEndpoint, error)
+	GetByServiceID(ctx context.Context, serviceID string) ([]models.ServiceEndpoint, error)
+	GetActiveByServiceID(ctx context.Context, serviceID string) ([]models.ServiceEndpoint, error)
+	Update(ctx context.Context, endpoint *models.ServiceEndpoint) error
+	Delete(ctx context.Context, id string) error
+	Deactivate(ctx context.Context, id string) error
+}
